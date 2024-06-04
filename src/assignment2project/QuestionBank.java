@@ -4,10 +4,22 @@
  */
 package assignment2project;
 
-/**
- *
- * @author alexa
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuestionBank {
-    
+    private List<Question> questions;
+
+    public QuestionBank() {
+        questions = new ArrayList<>();
+        // Load questions from database or other source
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void addQuestion(Question question) {
+        questions.add(question);
+    }
 }

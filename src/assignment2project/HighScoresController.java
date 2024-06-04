@@ -4,10 +4,16 @@
  */
 package assignment2project;
 
-/**
- *
- * @author alexa
- */
 public class HighScoresController {
-    
+    private HighScoresView highScoresView;
+
+    public HighScoresController(HighScoresView highScoresView) {
+        this.highScoresView = highScoresView;
+    }
+
+    public void showHighScores() {
+        highScoresView.setHighScores(DatabaseManager.loadHighScores());
+        highScoresView.setVisible(true);
+    }
 }
+
