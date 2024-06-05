@@ -13,12 +13,17 @@ public class LoginController {
 
     private LoginView loginView;
     private MainMenuView mainMenuView;
+    private String lastMessage; // For testing purposes
 
     public LoginController(LoginView loginView, MainMenuView mainMenuView) {
         this.loginView = loginView;
         this.mainMenuView = mainMenuView;
 
         this.loginView.setLoginButtonListener(new LoginButtonListener());
+    }
+    
+    public String getLastMessage() { // Getter for the last message
+        return lastMessage;
     }
 
     class LoginButtonListener implements ActionListener {
@@ -31,7 +36,8 @@ public class LoginController {
             Map<String, String> userCredentials = DatabaseManager.loadUserCredentials();
             if (userCredentials.containsKey(username)) {
                 if (userCredentials.get(username).equals(password)) {
-                    JOptionPane.showMessageDialog(loginView, "Login successful!");
+                    lastMessage = "Login successful!";
+                    JOptionPane.showMessageDialog(loginView, lastMessage);
                     System.out.println("Login successful for user: " + username);
                     loginView.setVisible(false);
 
@@ -40,18 +46,19 @@ public class LoginController {
                     GameController newGame = new GameController(millionareGameView, DatabaseManager.loadQuestions(), player);  // Initialise the game here
                     newGame.startGame(); //Start the new game
                 } else if (!userCredentials.get(username).equals(password)) {
-                    JOptionPane.showMessageDialog(loginView, "Incorrect password, or a user already exists with this name!\n"
-                            + "Usernames and Passwords are Case-Sensitive!");
+                    lastMessage = "Incorrect password, or a user already exists with this name!\nUsernames and Passwords are Case-Sensitive!";
+                    JOptionPane.showMessageDialog(loginView, lastMessage);
                     System.out.println("Incorrect password for user: " + username);
                 }
 
-            } else if (username.equals("") || password.equals("")) {
-                JOptionPane.showMessageDialog(loginView, "Username or password cannot be blank!\n"
-                        + "Usernames and Passwords are Case-Sensitive!");
-                System.out.println("Null username or password entered");
+            } else if (username.equals("") || password.equals("") || username.length() > 20 || password.length() > 20) {
+                lastMessage = "Username or password cannot be blank or > 20 characters!\nUsernames and Passwords are Case-Sensitive!";
+                JOptionPane.showMessageDialog(loginView, lastMessage);
+                System.out.println("Bad username or password entered");
             } else {
                 DatabaseManager.saveUserCredentials(username, password);
-                JOptionPane.showMessageDialog(loginView, "New user created!");
+                lastMessage = "New user created!";
+                JOptionPane.showMessageDialog(loginView, lastMessage);
                 System.out.println("New user created: " + username);
                 loginView.setVisible(false);
 

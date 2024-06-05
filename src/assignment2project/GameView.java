@@ -56,8 +56,6 @@ public class GameView extends JFrame {
         questionLabel.setText(question);
     }
 
-    
-    
 
     public void setScoreValue(Integer score){
         scoreValueLabel.setText("Question is worth: "+score.toString()+" points.");
@@ -82,6 +80,26 @@ public class GameView extends JFrame {
             return "d";
         }
         return null;
+    }
+    
+    //Necessary for test class to set the desired button option
+    public void setSelectedOption(String option){
+        switch (option) {
+            case "a":
+                option1.setSelected(true);
+                break;
+            case "b":
+                option2.setSelected(true);
+                break;
+            case "c":
+                option3.setSelected(true);
+                break;
+            case "d":
+                option4.setSelected(true);
+                break;
+            default:
+                break;
+        }
     }
 
     public void HandleWrongAnswer(int questionsAnswered, int score) {
