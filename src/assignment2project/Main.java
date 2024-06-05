@@ -25,11 +25,13 @@ public class Main {
         GameView gameView = new GameView();
         HighScoresView highScoresView = new HighScoresView();
         LoginView loginView = new LoginView();
+        
+        HighScoresController highScoresController = new HighScoresController(highScoresView);
 
         //Initialise the main menu controller
         MainMenuController mainMenuController = new MainMenuController(mainMenuView, highScoresView, loginView, gameView);
         
-        //Initialise the login controller (BAD, move to mainMenuController)
+        //Initialise the login controller
         LoginController loginController = new LoginController(loginView, mainMenuView);
 
         mainMenuView.setVisible(true);

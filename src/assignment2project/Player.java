@@ -5,7 +5,7 @@
 package assignment2project;
 
 public class Player {
-    private String name;
+    private String name; //Only variable held by player
 
     public Player(String name) {
         this.name = name;

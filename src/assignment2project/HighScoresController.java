@@ -4,6 +4,8 @@
  */
 package assignment2project;
 
+import java.util.List;
+
 public class HighScoresController {
     private HighScoresView highScoresView;
 
@@ -11,9 +13,15 @@ public class HighScoresController {
         this.highScoresView = highScoresView;
     }
 
-    public void showHighScores() {
-        highScoresView.setHighScores(DatabaseManager.loadHighScores());
-        highScoresView.setVisible(true);
+    //Show the highscores in the DB
+    public static List<String> getHighScores() {
+        List<String> highScores = DatabaseManager.loadHighScores(); //get highscores from DB
+        return highScores; //return highscores list
+    }
+    
+    //Remove highscores from DB
+    public static void removeHighScores(String username){
+        DatabaseManager.removeHighScore(username);
     }
 }
 

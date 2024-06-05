@@ -9,9 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class MainMenuView extends JFrame {
-    private JButton viewHighScoresButton;
-    private JButton loginButton;
-    private JButton removeHighScoreButton;
+    private JButton viewHighScoresButton; //highscores button
+    private JButton loginButton; //login button
+    private JButton removeHighScoreButton; //remove high scores button
 
     public MainMenuView() {
         setTitle("Who Wants to Be a Millionaire - Main Menu");
@@ -23,12 +23,14 @@ public class MainMenuView extends JFrame {
         loginButton = new JButton("Login");
         removeHighScoreButton = new JButton("Remove High Score");
 
+        //(3x1 grid layout)
         setLayout(new GridLayout(3, 1));
         add(viewHighScoresButton);
         add(loginButton);
         add(removeHighScoreButton);
     }
 
+    //Set the action listeners for the buttons
     public void setViewHighScoresButtonListener(ActionListener listener) {
         viewHighScoresButton.addActionListener(listener);
     }

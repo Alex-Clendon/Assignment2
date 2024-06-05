@@ -14,6 +14,7 @@ public class MainMenuController {
     private LoginView loginView;
     private GameView gameView;
 
+    //intitalise the views for the different parts of the program and set action listeners
     public MainMenuController(MainMenuView mainMenuView, HighScoresView highScoresView, LoginView loginView, GameView gameView) {
         this.mainMenuView = mainMenuView;
         this.highScoresView = highScoresView;
@@ -25,14 +26,16 @@ public class MainMenuController {
         this.mainMenuView.setRemoveHighScoreButtonListener(new RemoveHighScoreButtonListener());
     }
 
+    //View the high scores button logic
     class ViewHighScoresButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            highScoresView.setHighScores(DatabaseManager.loadHighScores());
+            highScoresView.setHighScores();
             highScoresView.setVisible(true);
         }
     }
 
+    //Login button logic
     class LoginButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -40,11 +43,12 @@ public class MainMenuController {
         }
     }
 
+    //Remove high scores button logic
     class RemoveHighScoreButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String username = JOptionPane.showInputDialog(mainMenuView, "Enter the username to remove the high score:");
-            DatabaseManager.removeHighScore(username);
+            HighScoresController.removeHighScores(username);
         }
     }
 }
