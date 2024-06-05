@@ -47,6 +47,15 @@ public class GameController {
             DatabaseManager.saveHighScore(player.getName(), score);
         }
     }
+    
+    //Getters and setters (only really used by test classes)
+    public int getScore(){
+        return this.score;
+    }
+    
+    public Player getPlayer(){
+        return this.player;
+    }
 
     class SubmitButtonListener implements ActionListener {
 

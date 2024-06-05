@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package assignment2project;
 
 import java.sql.*;
@@ -28,7 +27,7 @@ public class DatabaseManager {
         List<Question> questions = new ArrayList<>();
         String query = "SELECT * FROM questions ORDER BY point_value ASC";
 
-        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+        try ( Statement stmt = conn.createStatement();  ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 String text = rs.getString("question");
@@ -52,7 +51,7 @@ public class DatabaseManager {
         Map<String, String> userCredentials = new HashMap<>();
         String query = "SELECT username, password FROM users";
 
-        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+        try ( Statement stmt = conn.createStatement();  ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 String username = rs.getString("username");
@@ -68,7 +67,7 @@ public class DatabaseManager {
     public static void saveUserCredentials(String username, String password) {
         String insertUser = "INSERT INTO users (username, password) VALUES (?, ?)";
 
-        try (PreparedStatement pstmt = conn.prepareStatement(insertUser)) {
+        try ( PreparedStatement pstmt = conn.prepareStatement(insertUser)) {
 
             pstmt.setString(1, username);
             pstmt.setString(2, password);
@@ -78,10 +77,21 @@ public class DatabaseManager {
         }
     }
 
+    public static void removeUser(String username) {
+        String deleteUser = "DELETE FROM users WHERE username = ?";
+
+        try ( PreparedStatement pstmt = conn.prepareStatement(deleteUser)) {
+            pstmt.setString(1, username);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void saveHighScore(String username, int score) {
         String insertScore = "INSERT INTO HIGHSCORES (username, highscore) VALUES (?, ?)";
 
-        try (PreparedStatement pstmt = conn.prepareStatement(insertScore)) {
+        try ( PreparedStatement pstmt = conn.prepareStatement(insertScore)) {
 
             pstmt.setString(1, username);
             pstmt.setInt(2, score);
@@ -95,7 +105,7 @@ public class DatabaseManager {
         List<String> highScores = new ArrayList<>();
         String query = "SELECT username, highscore FROM HIGHSCORES ORDER BY highscore DESC";
 
-        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+        try ( Statement stmt = conn.createStatement();  ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 String entry = rs.getString("username") + ", " + rs.getInt("highscore");
@@ -110,7 +120,7 @@ public class DatabaseManager {
     public static void removeHighScore(String username) {
         String deleteScore = "DELETE FROM HIGHSCORES WHERE username = ?";
 
-        try (PreparedStatement pstmt = conn.prepareStatement(deleteScore)) {
+        try ( PreparedStatement pstmt = conn.prepareStatement(deleteScore)) {
 
             pstmt.setString(1, username);
             pstmt.executeUpdate();

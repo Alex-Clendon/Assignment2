@@ -44,6 +44,15 @@ public class LoginView extends JFrame {
     public String getPassword() {
         return new String(passwordField.getPassword());
     }
+    
+    //Setters for testing methods
+    public void setUsername(String username){
+        usernameField.setText(username);
+    }
+    
+    public void setPassword (String password){
+        passwordField.setText(password);
+    }
 
     public void setLoginButtonListener(ActionListener listener) {
         loginButton.addActionListener(listener);
